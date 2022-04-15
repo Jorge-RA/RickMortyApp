@@ -1,6 +1,6 @@
-# reto_t_evolvers
+# Challenge T Evolver
 
-A new Flutter project.
+Project to challenge T Evolvers using API Rick Morty
 
 ## Getting Started
 
