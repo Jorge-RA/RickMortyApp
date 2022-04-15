@@ -1,16 +1,29 @@
-# Challenge T Evolver
+# Challenge T-Evolver
 
-Project to challenge T Evolvers using API Rick Morty
+Project to challenge T-Evolvers using API Rick & Morty
 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+The API used is (https://rickandmortyapi.com/documentation)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Details:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Information of the characters of the series
+- Character search bar
+- Access the details of a character
+- Add a character to “favorites”.
+- Persistent "favorites"
+
+Flutter Version: 2.10.2 - 
+State management: Provider
+
+Packages:
+
+- google_fonts: ^2.3.1 
+- http: ^0.13.4
+- provider: ^6.0.2
+- shared_preferences: ^2.0.13
+
+
