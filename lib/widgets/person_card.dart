@@ -11,9 +11,11 @@ class PersonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final personProvider = Provider.of<PersonProvider>(context);
+    final Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
@@ -24,33 +26,30 @@ class PersonCard extends StatelessWidget {
                   tag: person.id,
                   child: Image.network(
                     person.image,
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
+                    height: size.height * 0.23,
                   ),
                 ),
               ),
               Positioned(
                 right: 5,
                 top: 5,
-                child: SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: person.favorite ? Colors.green : Colors.grey,
-                      borderRadius: const BorderRadius.all(Radius.circular(50)),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: person.favorite ? Colors.green : Colors.grey,
+                    borderRadius: const BorderRadius.all(Radius.circular(50)),
+                  ),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.favorite_border,
+                      color: Colors.white,
                     ),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.favorite_border,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        personProvider.isFavorite(person);
-                        Preferences.setFavorite(person);
-                        print('FAVORITES:');
-                        print(Preferences.getFavorites());
-                      },
-                    ),
+                    onPressed: () {
+                      personProvider.isFavorite(person);
+                      Preferences.setFavorite(person);
+                      print('FAVORITES:');
+                      print(Preferences.getFavorites());
+                    },
                   ),
                 ),
               ),
@@ -61,20 +60,23 @@ class PersonCard extends StatelessWidget {
             person.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: size.height * 0.02),
           ),
           const SizedBox(height: 5),
           Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
                 Icons.circle,
                 color: (person.status != 'Alive') ? Colors.red : Colors.green,
-                size: 15,
+                size: size.height * 0.02,
               ),
               SizedBox(width: 5),
               Text(
                 person.status,
-                style: TextStyle(color: Colors.grey),
+                style:
+                    TextStyle(color: Colors.grey, fontSize: size.height * 0.02),
               )
             ],
           ),

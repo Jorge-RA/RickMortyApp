@@ -12,7 +12,6 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final person = ModalRoute.of(context)!.settings.arguments as Person;
     final personProvider = Provider.of<PersonProvider>(context, listen: false);
-    print('ReBuild DetailsScreen');
 
     final Size size = MediaQuery.of(context).size;
     return Scaffold(

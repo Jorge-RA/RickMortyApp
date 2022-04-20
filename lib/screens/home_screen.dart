@@ -29,8 +29,8 @@ class HomeScreen extends StatelessWidget {
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisExtent: size.height * 0.3,
-                  crossAxisCount: 2,
+                  mainAxisExtent: size.height * 0.33,
+                  crossAxisCount: size.width > 500 ? 3 : 2,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                 ),
