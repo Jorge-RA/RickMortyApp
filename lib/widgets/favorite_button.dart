@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FavoriteButton extends StatelessWidget {
+class FavoriteButton extends StatefulWidget {
   final Function onPressed;
-  final bool favoriteColor;
-  const FavoriteButton(
+  bool favoriteColor;
+  FavoriteButton(
       {Key? key, required this.onPressed, this.favoriteColor = false})
       : super(key: key);
 
+  @override
+  State<FavoriteButton> createState() => _FavoriteButtonState();
+}
+
+class _FavoriteButtonState extends State<FavoriteButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
       child: MaterialButton(
         height: 50,
         elevation: 0,
-        color: favoriteColor ? Colors.green : null,
+        color: widget.favoriteColor ? Colors.green : null,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
           side: BorderSide(
@@ -25,16 +30,16 @@ class FavoriteButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              favoriteColor ? Icons.favorite : Icons.favorite_border,
-              color: favoriteColor
+              widget.favoriteColor ? Icons.favorite : Icons.favorite_border,
+              color: widget.favoriteColor
                   ? Colors.white
                   : Color.fromARGB(255, 84, 212, 88),
             ),
             Text(
-              favoriteColor ? ' En favoritos' : ' Añadir a favoritos',
+              widget.favoriteColor ? ' En favoritos' : ' Añadir a favoritos',
               style: GoogleFonts.raleway(
                 fontWeight: FontWeight.bold,
-                color: favoriteColor
+                color: widget.favoriteColor
                     ? Colors.white
                     : Color.fromARGB(255, 84, 212, 88),
               ),
@@ -42,7 +47,10 @@ class FavoriteButton extends StatelessWidget {
           ],
         ),
         onPressed: () {
-          onPressed();
+          widget.onPressed();
+          setState(() {
+            widget.favoriteColor = !widget.favoriteColor;
+          });
         },
       ),
     );

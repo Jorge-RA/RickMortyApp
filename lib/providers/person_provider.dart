@@ -14,28 +14,24 @@ class PersonProvider extends ChangeNotifier {
       //En caso de que ya esté cargado en la Lista...
       listPersons.setAll(listPersons.indexOf(person), [person]);
     } catch (e) {
-      //listPersons.add(person);
       listPersonsFavorites.add(person.id.toString());
     }
     notifyListeners();
   }
 
   Future<List<Person>> getPersons() async {
-    //await Preferences.prefs.remove('myFavorites');
+    //await Preferences.prefs.remove('myFavorites'); <- Clear all favorites
     listPersons = await PersonServices().getPersons(page: 1);
     var page2 = await PersonServices().getPersons(page: 2);
     listPersons.addAll(page2);
     listPersonsFavorites = Preferences.getFavorites();
-    print('ListPersonFav: $listPersonsFavorites');
 
     listPersons.forEach((person) async {
-      //person.firstCap = await PersonServices().getFirstCap(person.id);
       if (listPersonsFavorites.contains(person.id.toString())) {
         person.favorite = true;
         listPersons.setAll(listPersons.indexOf(person), [person]);
       }
     });
-    // print('ListPersons: ${listPersons[1].favorite}');
 
     notifyListeners();
     return listPersons;
@@ -51,10 +47,6 @@ class PersonProvider extends ChangeNotifier {
         listPersonsSearch.setAll(listPersonsSearch.indexOf(person), [person]);
       }
     });
-
-    /*listPersonsSearch.forEach((person) async {
-      person.firstCap = await PersonServices().getFirstCap(person.id);
-    });*/
 
     return listPersonsSearch;
   }
